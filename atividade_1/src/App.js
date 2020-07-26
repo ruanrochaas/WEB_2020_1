@@ -1,24 +1,18 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+
+import Questao1Func from "./components/questao1/Questao1";
+import Questao1Class from "./components/questao2/Questao2";
+import PaiFunc from "./components/questao3/Pai";
+import PaiClass from "./components/questao4/Pai";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Questao1Func/>
+      <Questao1Class/>
+      <PaiFunc/>
+      <PaiClass/>
     </div>
   );
 }
