@@ -1,0 +1,34 @@
+{
+  "disciplinas": [
+    {
+      "nome": "Desenvolvimento Web",
+      "curso": "SI",
+      "capacidade": "40",
+      "id": 1
+    },
+    {
+      "id": 2,
+      "nome": "Projeto Técnico",
+      "curso": "DD",
+      "capacidade": 30
+    },
+    {
+      "nome": "Desenho 1",
+      "curso": "DD",
+      "capacidade": "30",
+      "id": 5
+    },
+    {
+      "nome": "Desenho 2",
+      "curso": "DD",
+      "capacidade": "30",
+      "id": 6
+    },
+    {
+      "nome": "Empreendorismo",
+      "curso": "DD",
+      "capacidade": "50",
+      "id": 7
+    }
+  ]
+}

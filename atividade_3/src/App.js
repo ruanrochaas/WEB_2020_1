@@ -17,13 +17,13 @@ export default class App extends Component {
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
               <ul className="navbar-nav mr-auto">
                 <li className="nav-item">
-                <Link to={'/'} className="nav-link">Home</Link>
+                  <Link to={'/'} className="nav-link">Home</Link>
                 </li>
                 <li className="nav-item">
-                <Link to={'/create'} className="nav-link">Create</Link>
+                  <Link to={'/insert'} className="nav-link">Inserir</Link>
                 </li>
                 <li className="nav-item">
-                <Link to={'/list'} className="nav-link">List</Link>
+                  <Link to={'/list'} className="nav-link">Listar</Link>
                 </li>
               </ul>
             </div>
@@ -32,7 +32,7 @@ export default class App extends Component {
           <h2>Projeto CRUD</h2> <br />
           <Switch>
             <Route exact path='/' component={Home} />
-            <Route path='/create' component={Create} />
+            <Route path='/insert' component={Create} />
             <Route path='/edit/:id' component={Edit} />
             <Route path='/list' component={List} />
           </Switch>
