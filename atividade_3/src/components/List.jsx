@@ -51,7 +51,6 @@ export default class List extends Component {
     render() {
         return (
             <div>
-                <p>List Estudante</p>
                 <table className="table table-striped" style={{ marginTop: 20 }}>
                     <thead>
                         <tr>
