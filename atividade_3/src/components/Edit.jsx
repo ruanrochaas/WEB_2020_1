@@ -24,8 +24,8 @@ export default class Create extends Component {
         this.setState({capacidade:e.target.value});
     }
     componentDidMount(){
-        //console.log("id: " + this.props.match.params.id)
-        axios.get('http://localhost:3001/disciplinas/'+this.props.match.params.id)
+        //console.log(this.props)
+        axios.get('http://localhost:3002/disciplinas/retrieve/'+this.props.match.params.id)
         .then(
             (res)=>{
                 this.setState(
@@ -48,8 +48,8 @@ export default class Create extends Component {
         e.preventDefault();
 
         const disciplinaAtualizada = {nome:this.state.nome,curso:this.state.curso,capacidade:this.state.capacidade}
-
-        axios.put('http://localhost:3001/disciplinas/'+this.props.match.params.id,disciplinaAtualizada)
+        
+        axios.put('http://localhost:3002/disciplinas/update/'+this.props.match.params.id,disciplinaAtualizada)
         .then(
             res=>{
                 //console.log(res.data)

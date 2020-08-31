@@ -29,10 +29,10 @@ export default class Create extends Component {
 
         const novaDisciplina = {nome:this.state.nome,curso:this.state.curso,capacidade:this.state.capacidade}
 
-        axios.post('http://localhost:3001/disciplinas',novaDisciplina)
+        axios.post('http://localhost:3002/disciplinas/register',novaDisciplina)
         .then(
             (res)=>{
-                console.log(res.data.id);
+                console.log(res.data._id);
             }
         )
         .catch(
