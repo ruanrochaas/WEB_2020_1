@@ -1,89 +1,92 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+import React, { Component } from 'react'
+import FirebaseContext from '../utils/FirebaseContext'
+import FirebaseService from '../services/FirebaseService'
 
-export default class Create extends Component {
+const EditPage = (props) => (
+    <FirebaseContext.Consumer>
+        {firebase => <Edit firebase={firebase} id={props.match.params.id} />}
+    </FirebaseContext.Consumer>
+)
 
-    constructor(props){
-        super(props);
-        this.state = {nome:'', curso:'', capacidade:''};
-        this.setNome = this.setNome.bind(this);
-        this.setCurso = this.setCurso.bind(this);
-        this.setCapacidade = this.setCapacidade.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
+class Edit extends Component {
+    constructor(props) {
+        super(props)
+        this.state = { nome: '', curso: '', capacidade: '' }
+        this.setNome = this.setNome.bind(this)
+        this.setCurso = this.setCurso.bind(this)
+        this.setCapacidade = this.setCapacidade.bind(this)
+        this.onSubmit = this.onSubmit.bind(this)
     }
 
-    setNome(e){
-        this.setState({nome:e.target.value});
-    }
-
-    setCurso(e){
-        this.setState({curso:e.target.value});
-    }
-
-    setCapacidade(e){
-        this.setState({capacidade:e.target.value});
-    }
-    componentDidMount(){
-        //console.log(this.props)
-        axios.get('http://localhost:3002/disciplinas/retrieve/'+this.props.match.params.id)
-        .then(
-            (res)=>{
-                this.setState(
-                    {
-                        nome:res.data.nome,
-                        curso:res.data.curso,
-                        capacidade:res.data.capacidade
-                    }
-                )
-            }
-        )
-        .catch(
-            (error)=>{
-                console.log(error)
-            }
+    componentDidMount() {
+        FirebaseService.retrieve(this.props.firebase.getFirestore(),
+            (disciplina) => {
+                if (disciplina)
+                    this.setState({
+                        nome: disciplina.nome,
+                        curso: disciplina.curso,
+                        capacidade: disciplina.capacidade
+                    })
+            },
+            this.props.id
         )
     }
 
-    onSubmit(e){
-        e.preventDefault();
+    setNome(e) {
+        this.setState({ nome: e.target.value })
+    }
 
-        const disciplinaAtualizada = {nome:this.state.nome,curso:this.state.curso,capacidade:this.state.capacidade}
-        
-        axios.put('http://localhost:3002/disciplinas/update/'+this.props.match.params.id,disciplinaAtualizada)
-        .then(
-            res=>{
-                //console.log(res.data)
-                this.props.history.push('/list');
+    setCurso(e) {
+        this.setState({ curso: e.target.value })
+    }
+
+    setCapacidade(e) {
+        this.setState({ capacidade: e.target.value })
+    }
+
+    onSubmit(e) {
+        e.preventDefault()
+        FirebaseService.edit(
+            this.props.firebase.getFirestore(),
+            (mensagem) => {
+                console.log(mensagem)
+            },
+            this.props.id,
+            {
+                nome: this.state.nome,
+                curso: this.state.curso,
+                capacidade: this.state.capacidade
             }
         )
-        .catch(error=>console.log(error))
-
-        this.setState({nome:'',curso:'',capacidade:''});
-           
     }
 
     render() {
         return (
-            <div style={{marginTop: 10}}>
-                <h3>Inserir Disciplina</h3>
+            <div style={{ marginTop: 10 }}>
+                <h3>Editar Disciplina</h3>
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group">
                         <label>Nome: </label>
-                        <input type="text" className="form-control" value={this.state.nome} onChange={this.setNome}/>
+                        <input type="text" className="form-control"
+                            value={this.state.nome} onChange={this.setNome} />
                     </div>
                     <div className="form-group">
                         <label>Curso: </label>
-                        <input type="text" className="form-control" value={this.state.curso} onChange={this.setCurso}/>
+                        <input type="text" className="form-control"
+                            value={this.state.curso} onChange={this.setCurso} />
                     </div>
                     <div className="form-group">
                         <label>Capacidade: </label>
-                        <input type="number" className="form-control" value={this.state.capacidade} onChange={this.setCapacidade}/>
+                        <input type="text" className="form-control"
+                            value={this.state.capacidade} onChange={this.setCapacidade} />
                     </div>
                     <div className="form-group">
-                        <input type="submit" value="Criar" className="btn btn-primary"/>
+                        <input type="submit" value="Editar Disciplina" className="btn btn-primary" />
                     </div>
                 </form>
             </div>
         )
     }
 }
+
+export default EditPage
