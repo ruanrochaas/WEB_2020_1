@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import TableRow from "./TableRow";
 import FirebaseContext from '../utils/FirebaseContext'
 import FirebaseService from '../services/FirebaseService'
+
 const ListPage = () => (
     <FirebaseContext.Consumer>
         {firebase => <List firebase={firebase} />}
