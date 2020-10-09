@@ -14,11 +14,11 @@ function App() {
         <h1>REDUX CALC</h1>
       </nav>
       <div className="content">
-        <div className="line1">
+        <div className="row line">
           <Number1 />
           <Number2 />
         </div>
-        <div className="line2">
+        <div className="row line" style={{marginTop: 30}}>
           <Sum />
           <Multiplication />
           <Greater />
