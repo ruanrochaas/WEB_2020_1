@@ -1,16 +1,8 @@
 import React, { Component } from 'react';
 
-export default class Sum extends Component {
+import {connect} from 'react-redux';
 
-    constructor(props){
-        super(props);
-        this.state = {sum:0};
-        this.setSum = this.setSum.bind(this);
-    }
-
-    setSum(e) {
-        this.setState({ sum: e.target.value })
-    }
+class Sum extends Component {
 
     render() {
         return (
@@ -18,10 +10,19 @@ export default class Sum extends Component {
                 <div className="card">
                     <h5 className="card-header">A soma é:</h5>
                     <div className="card-body">
-                        <h5 className="card-title text-center" style={{fontSize: 50}}>{this.state.sum}</h5>
+                        <h5 className="card-title text-center" style={{fontSize: 50}}>{this.props.number1 + this.props.number2}</h5>
                     </div>
                 </div>
             </div>
         )
     }
 }
+
+function mapStateToProps(state){
+    return {
+        number1: state.number1.valorNumber1,
+        number2: state.number2.valorNumber2
+    }
+}
+
+export default connect(mapStateToProps)(Sum);

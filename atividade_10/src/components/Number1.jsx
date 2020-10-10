@@ -1,16 +1,9 @@
 import React, { Component } from 'react';
 
-export default class Number1 extends Component {
+import {connect} from 'react-redux';
+import {alterarNumero1} from '../store/actions/numberAction';
 
-    constructor(props){
-        super(props);
-        this.state = {number1:''};
-        this.setNumber1 = this.setNumber1.bind(this);
-    }
-
-    setNumber1(e) {
-        this.setState({ number1: e.target.value })
-    }
+class Number1 extends Component {
 
     render() {
         return (
@@ -19,10 +12,28 @@ export default class Number1 extends Component {
                     <h5 className="card-header">Número 1</h5>
                     <div className="card-body">
                         <p className="card-text">Escolha o número:</p>
-                        <input type="number" className="form-control" value={this.state.number1} onChange={this.setNumber1}/>
+                        <input type="number" className="form-control" value={this.props.number1} onChange={evt => this.props.alterarNumeroInternamente(evt.target.value)}/>
                     </div>
                 </div>
             </div>
         )
     }
 }
+
+function mapStateToProps(state){
+    return {
+        number1: state.number1.valorNumber1,
+        number2: state.number2.valorNumber2
+    }
+}
+
+function mapActionCreatorToProps(dispatch){
+    return{
+        alterarNumeroInternamente(novoNumero){
+            const action = alterarNumero1(novoNumero);
+            dispatch(action);
+        }
+    }
+}
+
+export default connect(mapStateToProps,mapActionCreatorToProps)(Number1);
