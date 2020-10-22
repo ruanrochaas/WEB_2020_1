@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 
 import Card from './commons/Card';
 
-export default class Home extends Component {
+export default class Main extends Component {
     render() {
         return (
-            <Card title="Home">
+            <Card title="Main Component!!">
                 
             </Card>
         )

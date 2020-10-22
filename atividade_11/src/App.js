@@ -2,12 +2,17 @@ import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
+import Main from './components/Main';
+import Signin from './components/Signin';
+import Signup from './components/Signup';
 import Create from './components/Create';
 import Edit from './components/Edit';
 import List from './components/List';
 import Home from './components/Home';
 
-export default class App extends Component {
+import { connect } from 'react-redux'
+
+class App extends Component {
   render() {
     return (
       <Router>
@@ -20,18 +25,27 @@ export default class App extends Component {
                   <Link to={'/'} className="nav-link">Home</Link>
                 </li>
                 <li className="nav-item">
+                  <Link to={'/signin'} className="nav-link">Login</Link>
+                </li>
+                <li className="nav-item">
+                  <Link to={'/signup'} className="nav-link">Cadastro</Link>
+                </li>
+                <li className="nav-item">
                   <Link to={'/insert'} className="nav-link">Inserir</Link>
                 </li>
                 <li className="nav-item">
                   <Link to={'/list'} className="nav-link">Listar</Link>
                 </li>
               </ul>
+              {this.props.user}
             </div>
           </nav>
 
           <h2>Projeto CRUD</h2> <br />
           <Switch>
             <Route exact path='/' component={Home} />
+            <Route exact path='/signin' component={Signin} />
+            <Route exact path='/signup' component={Signup} />
             <Route path='/insert' component={Create} />
             <Route path='/edit/:id' component={Edit} />
             <Route path='/list' component={List} />
@@ -41,3 +55,10 @@ export default class App extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    user: state.authReducer.user
+  }
+}
+export default connect(mapStateToProps)(App)
