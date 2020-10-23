@@ -10,6 +10,6 @@ export default class Firebase{
     }
 
     getFirestore(){
-        return firebase.firestore()
+        return firebase.firestore() 
     }
 }
