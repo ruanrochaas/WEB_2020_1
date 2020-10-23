@@ -1,4 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import Card from './commons/RestrictedCard'
+import { connect } from 'react-redux'
+import { signout } from '../store/actions/authActionCreator'
 
 import TableRow from "./TableRow";
 import FirebaseContext from '../utils/FirebaseContext'
@@ -9,6 +12,7 @@ const ListPage = () => (
         {firebase => <List firebase={firebase} />}
     </FirebaseContext.Consumer>
 )
+
 class List extends Component {
     constructor(props) {
         super(props)
@@ -64,26 +68,54 @@ class List extends Component {
             </tr>
         )
     }
+    logout() {
+        this.props.mySignout(
+            () => {
+                this.props.history.push('/signin')
+            }
+        )
+    }
     render() {
         return (
-            <div style={{ marginTop: 10 }}>
-                <h3>Listar Disciplinas</h3>
-                <table className="table table-striped" style={{ marginTop: 20 }}>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nome</th>
-                            <th>Curso</th>
-                            <th>Capacidade</th>
-                            <th colSpan="2"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.montarTabela()}
-                    </tbody>
-                </table>
-            </div>
+            <Card title='Listar Disciplinas' history={this.props.history}>
+                <div style={{ marginTop: 10 }}>
+                    <table className="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nome</th>
+                                <th>Curso</th>
+                                <th>Capacidade</th>
+                                <th colSpan="2"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this.montarTabela()}
+                        </tbody>
+                    </table>
+                </div>
+                <button className='btn btn-danger'
+                    onClick={() => this.logout()}
+                >
+                    Fazer Logout
+                </button>
+            </Card>
         )
     }
 }
-export default ListPage
+function mapStateToProps(state) {
+    return {
+        userMsg: state.authReducer.authMsg,
+        firebaseAuth: state.firebaseReducer.auth
+    }
+}
+function mapDispatchToProps(dispatch) {
+    return {
+        mySignout(callback) {
+            const action = signout(callback)
+            dispatch(action)
+        }
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(ListPage)
+

@@ -1,14 +1,24 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import Card from './Card'
+
 import { connect } from 'react-redux'
 
-class RestrictedCard extends Component {
-    componentDidMount() {
-        if (this.props.firebaseAuth.isLoaded && this.props.firebaseAuth.isEmpty) {
+class RestrictedCard extends Component{
+
+    componentDidMount(){
+
+        console.log(this.props.firebaseAuth.isLoaded);
+
+        if(!this.props.firebaseAuth.isLoaded && this.props.firebaseAuth.isEmpty){
             this.props.history.push('/signin')
         }
+
+        /* if(!this.props.emailVerified){
+            this.props.history.push('/signin')
+        } */
     }
-    render() {
+
+    render(){
         return (
             <Card title={this.props.title}>
                 {this.props.children}
@@ -16,10 +26,14 @@ class RestrictedCard extends Component {
         )
     }
 }
+
 function mapStateToProps(state) {
     return {
-        firebaseAuth: state.firebaseReducer.auth
+        firebaseAuth: state.firebaseReducer.auth,
+        emailVerified: state.authReducer.verified
     }
 }
+
+
 
 export default connect(mapStateToProps)(RestrictedCard)
