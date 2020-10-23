@@ -1,4 +1,4 @@
-/* import React, { Component } from 'react'
+import React, { Component } from 'react'
 import Card from './commons/RestrictedCard'
 import { connect } from 'react-redux'
 import { signout } from '../store/actions/authActionCreator'
@@ -24,7 +24,7 @@ class List extends Component {
     componentDidMount() {
         this._isMounted = true
         this.setState({ loading: true })
-        FirebaseService.list(this.props.firebase.getFirestore(),
+        FirebaseService.list(this.props.createFirestoreInstance(),
             (disciplinas) => {
                 this._isMounted && this.setState({ disciplinas: disciplinas, loading: false })
             })
@@ -119,9 +119,9 @@ function mapDispatchToProps(dispatch) {
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ListPage)
 
- */
 
-import React, {Component} from 'react'
+
+/* import React, {Component} from 'react'
 import Card from './commons/RestrictedCard'
 
 import { connect } from 'react-redux'
@@ -167,4 +167,4 @@ function mapDispatchToProps(dispatch){
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(ContentA)
+export default connect(mapStateToProps,mapDispatchToProps)(ContentA) */

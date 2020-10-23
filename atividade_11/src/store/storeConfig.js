@@ -3,6 +3,7 @@ import reduxThunk from 'redux-thunk'
 
 import reducer from '../store/reducers'
 import firebase from '../utils/Firebase'
+import { createFirestoreInstance } from 'redux-firestore'
 
 function saveToLocalStorage(state) {
     try {
@@ -41,7 +42,8 @@ store.subscribe(
 const rrfProps = {
     firebase,
     config: {},
-    dispatch: store.dispatch
+    dispatch: store.dispatch,
+    createFirestoreInstance
 }
 
 export { store, rrfProps }

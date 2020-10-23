@@ -9,7 +9,7 @@ class RestrictedCard extends Component{
 
         console.log(this.props.firebaseAuth.isLoaded);
 
-        if(!this.props.firebaseAuth.isLoaded && this.props.firebaseAuth.isEmpty){
+        if(this.props.firebaseAuth.isLoaded && this.props.firebaseAuth.isEmpty){
             this.props.history.push('/signin')
         }
 
